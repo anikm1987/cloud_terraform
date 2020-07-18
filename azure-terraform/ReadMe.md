@@ -18,3 +18,14 @@
 # Contains
 
 - CreateAzureRG - contains terraform code to create resource group and service principle associated with it with role assignment.
+- database-postgres - Create Azure PAAS postgres db
+- Azure_registry - Create ACR
+
+- Add below contents in credentials.auto.tfvars
+
+# replace all teh values with actual values before running
+client_secret   = "client_secret"
+subscription_id = "subscription_id"
+client_id       = "client_id"
+tenant_id       = "tenant_id"
+administrator_login_password="administrator_login_password_pg"
