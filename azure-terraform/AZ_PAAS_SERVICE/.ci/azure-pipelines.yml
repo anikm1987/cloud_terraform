@@ -1,0 +1,58 @@
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+      - Dev/*
+      - poc/*
+pr:
+  branches:
+    include:
+      - master
+  paths:
+    exclude:
+        - Dev/*
+        - poc/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+
+variables:
+    - group: TestRelease
+
+jobs:
+  - job: pull_request
+    condition: and(succeeded(), eq(variables['Build.Reason'], 'PullRequest'))
+    variables:
+      _GHE_BRANCH_NAME: $[ variables['System.PullRequest.SourceBranch'] ]
+    steps:
+      - template: pr.yml
+        parameters:
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+          resource_group_name: $(resource_group_name)
+          storage_account_name: $(storage_account_name)
+          container_name: $(container_name)
+          key: $(key)
+
+  - job: push
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    variables:
+      _GHE_BRANCH_NAME: $[ variables['Build.SourceBranchName'] ]
+    steps:
+      - template: merge.yml
+        parameters:
+          ARM_CLIENT_ID: $(ARM_CLIENT_ID)
+          ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
+          ARM_TENANT_ID: $(ARM_TENANT_ID)
+          ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
+          ARM_ACCESS_KEY: $(ARM_ACCESS_KEY)
+          resource_group_name: $(resource_group_name)
+          storage_account_name: $(storage_account_name)
+          container_name: $(container_name)
+          key: $(key)
