@@ -1,4 +1,4 @@
-# Getting started with Terraform with Azure
+# Terraform Samples
 
 - Proxy issue while working inside office firewall / vpn
 
@@ -15,19 +15,22 @@
   - during execution if any error occurs then don't worry about already created infrastructure. .tfstate actually keep track of failures as well and update the state if you rerun after fixing the issue.
   - Able to create the resource group and service principal successfully.
 
-# Contains projects
+# Project tree
 
-- CreateAzureRG - contains terraform code to create resource group and service principle associated with it with role assignment.
-- database-postgres - Create Azure PAAS postgres db
-- Azure_registry - Create ACR
-- TF-ADO-01 - Testing newly launched Azure Devops terraform provider
-- AZ_PAAS_SERVICE - Creating Azure PAAS service and service plan with ADO pipeline
-
-- Add below contents in credentials.auto.tfvars
-
-# replace all teh values with actual values before running
-client_secret   = "client_secret"
-subscription_id = "subscription_id"
-client_id       = "client_id"
-tenant_id       = "tenant_id"
-administrator_login_password="administrator_login_password_pg"
+```
+├───azure-terraform
+│   ├───AzureDevopsPoc
+│   │   └───backup
+│   ├───AzureRegistry
+│   ├───CreateResourceGroup
+│   ├───Database
+│   │   └───postgres
+│   │       ├───modules
+│   │       │   └───firewall_list
+│   │       └───scripts
+│   └───PassPoc
+│       ├───.ci
+│       └───poc
+└───gcp-terraform
+    └───CreateProject
+```
