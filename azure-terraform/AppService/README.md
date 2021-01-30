@@ -4,16 +4,12 @@ This terraform code is to create Azure app service with custom docker container 
 
 Feature List - 
 -------------
-```
-- Create app service within app service plan using IaC terraform.
-    - This will deploy and run mydemoappregistry.azurecr.io/blogger/mydemoapp:v1.0.0
-      docker image.
-- Expose postgres database connection string using application settings.
-- Secure integration with Azure Key-vault, password read from key-vault 
-  at the runtime.
-- Enable system assigned identity to access Azure container registry
-  securely with only AcrPull role.
-```
+1. Create app service within app service plan using IaC terraform.
+    - This will deploy and run mydemoappregistry.azurecr.io/blogger/mydemoapp:v1.0.0 docker image.
+2. Expose postgres database connection string using application settings.
+3. Secure integration with Azure Key-vault, password read from key-vault at the runtime.
+4. Enable system assigned identity to access Azure container registry securely with only AcrPull role.
+
 
 Pre-requisites
 -------------
