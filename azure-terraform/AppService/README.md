@@ -6,10 +6,13 @@ Feature List -
 -------------
 ```
 - Create app service within app service plan using IaC terraform.
-    - This will deploy and runmydemoappregistry.azurecr.io/blogger/mydemoapp:v1.0.0 docker image.
+    - This will deploy and run mydemoappregistry.azurecr.io/blogger/mydemoapp:v1.0.0
+      docker image.
 - Expose postgres database connection string using application settings.
-- Secure integration with Azure Key-vault, password read from key-vault at the runtime.
-- Enable system assigned identity to access Azure container registry securely with only AcrPull role.
+- Secure integration with Azure Key-vault, password read from key-vault 
+  at the runtime.
+- Enable system assigned identity to access Azure container registry
+  securely with only AcrPull role.
 ```
 
 Pre-requisites
@@ -17,7 +20,8 @@ Pre-requisites
 1. Azure Resource group where it will be created.
 2. Azure storage account with a container 
 3. Azure container registry with the docker image stored inside of it.
-3. Terraform >= 0.13
+4. Azure key vault with password updated.
+5. Terraform >= 0.13
 
 
 Github location 
@@ -90,8 +94,10 @@ terraform apply -var-file=param.tfvars
 
 6. This will create Azure app Service with pattern (${var.app_name}-${resource_group_location}-${var.environment}--app-service)    
 ```
-Example - Above mentioned tfvars will create 
-            Azure app service with name - mydemoapp-eastus2-dev--app-service 
-            Connection with database name - mydemodatabase, key vault name - mydemokv and acr registry - mydemoappregistry
-
+Above mentioned tfvars will create 
+Azure app service with name - mydemoapp-eastus2-dev--app-service 
+Connection with 
+    database name - mydemodatabase, 
+    key vault name - mydemokv and 
+    acr registry - mydemoappregistry
 ```
