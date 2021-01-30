@@ -1,7 +1,7 @@
-Terraform Repository
+Terraform Repository (WIP)
 ---------------
 
-This repository is created to keep all terraform files. Some folders are not completed, may contains initial structures. This is a work in progress.
+This repository is created to keep all terraform files. Some folders are not completed, may contains initial structures.
 
 
 Project tree
