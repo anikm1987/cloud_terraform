@@ -63,3 +63,9 @@ variable "key_vault_name" {
   default     = "mydemokv"
   description = "Azure Key vault name. Secrets will be read from here."
 }
+
+variable "user_identity_name" {
+  type        = string
+  default     = "app-service-user-identity"
+  description = "Azure user managed identity name which has acrPull role assigned."
+}

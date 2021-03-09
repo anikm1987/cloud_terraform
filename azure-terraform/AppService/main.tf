@@ -10,6 +10,11 @@ data "azurerm_resource_group" "app-service-rg" {
   name = var.resource_group_name
 }
 
+data "azurerm_user_assigned_identity" "user-assigned-identity" {
+  name                = var.user_identity_name
+  resource_group_name = data.azurerm_resource_group.appservice-rg.name
+}
+
 data "azurerm_key_vault" "azure_key_vault" {
   name = var.key_vault_name
   resource_group_name = data.azurerm_resource_group.app-service-rg.name
@@ -51,7 +56,8 @@ resource "azurerm_app_service" "app-service" {
   }
   
   identity {
-    type = "SystemAssigned"
+    type = "SystemAssigned, UserAssigned"
+    identity_ids=[data.azurerm_user_assigned_identity.user-assigned-identity.id]
   }
  
   tags = {
@@ -64,8 +70,8 @@ resource "azurerm_app_service" "app-service" {
 
 resource "azurerm_key_vault_access_policy" "key_vault_access" {
   key_vault_id = data.azurerm_key_vault.azure_key_vault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azurerm_app_service.app-service.identity[0].principal_id
+  tenant_id    = data.azurerm_client_config.identity.0.tenant_id
+  object_id    = azurerm_app_service.app-service.identity.0.principal_id
 
   key_permissions = [
     "get",
@@ -74,12 +80,10 @@ resource "azurerm_key_vault_access_policy" "key_vault_access" {
   secret_permissions = [
     "get",
   ]
-}
 
-resource "azurerm_role_assignment" "app_Service_identity_role" {
-  scope                = data.azurerm_container_registry.registry.id
-  role_definition_name = "registryPull"
-  principal_id         = azurerm_app_service.app-service.identity[0].principal_id
+  certificate_permissions = [
+    "get",
+  ]
 }
 
 # output the app service plan and app service url
