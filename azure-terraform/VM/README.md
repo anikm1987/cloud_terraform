@@ -67,7 +67,7 @@ Getting Started
 3. Refer - variables.tf for detailed description of each variables. 
 
 4. Make necessary changes in backend.tfvars file if you want to manage the tfstate file in Azure storage.
-and uncomment line  #  backend "azurerm" {} in provider,.tf file
+and uncomment line  #  backend "azurerm" {} in provider.tf file
 
 5. Execute below commands for creating the app service -
 
@@ -82,3 +82,5 @@ terraform apply
 # Note - Please keep note of the terraform outputs.
 
 ```
+
+6. All VMs will be configured with SSH and disbled password authentication
