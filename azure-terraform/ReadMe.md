@@ -8,18 +8,21 @@ Project tree
 -------------
 
 ```
-├───azure-terraform
-│   ├───AppService
-│   ├───AzureDevopsPoc
-│   │   └───backup
-│   ├───Database
-│   │   └───postgres
-│   │       ├───modules
-│   │       │   └───firewall_list
-│   │       └───scripts
-│   └───PassPoc
-│       ├───.ci
-│       └───poc
-└───gcp-terraform
-    └───CreateProject
+.
+├── AppService
+├── AzureDevopsPoc
+│   └── backup
+├── Database
+│   └── postgres
+│       ├── modules
+│       │   └── firewall_list
+│       └── scripts
+├── PassPoc
+│   └── poc
+├── UserIdentity
+└── VM
+    ├── create-multi-size-multi-vm-existing-vnet-rg
+    ├── create-rg-vnet-vm
+    ├── create-same-size-multi-vm-existing-vnet-rg
+    └── create-vm-existing-vnet-rg
 ```
